@@ -48,6 +48,12 @@ export const api = {
       { method: "PATCH", body: body !== undefined ? JSON.stringify(body) : undefined },
       token,
     ),
+  put: <T>(path: string, body?: unknown, token?: string | null) =>
+    request<T>(
+      path,
+      { method: "PUT", body: body !== undefined ? JSON.stringify(body) : undefined },
+      token,
+    ),
   delete: <T>(path: string, token?: string | null) =>
     request<T>(path, { method: "DELETE" }, token),
 };
