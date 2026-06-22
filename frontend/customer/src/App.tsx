@@ -1,11 +1,11 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import { AppShell } from "./routes/AppShell";
+import { ChatView } from "./routes/ChatView";
 
 function App() {
   return (
     <Routes>
-      <Route path="/b/:businessSlug/:locationSlug" element={<AppShell />} />
+      <Route path="/b/:businessSlug/:locationSlug" element={<ChatView />} />
       <Route path="*" element={<Navigate to="/b/demo/main" replace />} />
     </Routes>
   );
