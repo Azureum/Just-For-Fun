@@ -33,6 +33,12 @@ cd backend
 pytest
 ```
 
+## Deployment
+
+A [`render.yaml`](./render.yaml) Blueprint deploys all three services (backend +
+both frontends) to [Render](https://render.com), backed by your Supabase project
+and DeepSeek. See [`DEPLOY.md`](./DEPLOY.md) for the step-by-step.
+
 ## Status
 
 Auth/tenancy (Supabase Auth + Postgres RLS), locations, FAQs/additional knowledge, AI personality, and the public landing + chat experience (DeepSeek-backed) are implemented and tested end to end. The dashboard UI for managing locations, training content, and personality is in progress. Still to come: answer classification/unanswered-question flagging, promotions, media uploads, and analytics.
