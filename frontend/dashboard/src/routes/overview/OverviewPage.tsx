@@ -1,3 +1,4 @@
+import type { ComponentType, SVGProps } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import {
@@ -6,6 +7,7 @@ import {
   type OverviewStats,
 } from "../../api/overview";
 import { useAuth } from "../../auth/AuthContext";
+import { CheckIcon, ConversationsIcon, LocationsIcon, ScanIcon } from "../../components/icons";
 
 export function OverviewPage() {
   const { token, business } = useAuth();
@@ -39,16 +41,19 @@ function OverviewContent({ stats }: { stats: OverviewStats }) {
           label="Total Conversations"
           value={stats.total_conversations.toLocaleString()}
           deltaPct={stats.conversations_delta_pct}
+          icon={ConversationsIcon}
         />
         <StatCard
           label="QR Scans"
           value={stats.qr_scans.toLocaleString()}
           deltaPct={stats.qr_scans_delta_pct}
+          icon={ScanIcon}
         />
         <StatCard
           label="Active Locations"
           value={stats.active_locations.toLocaleString()}
           subtext={`of ${stats.total_locations} total`}
+          icon={LocationsIcon}
         />
         <StatCard
           label="Answer Rate"
@@ -58,6 +63,7 @@ function OverviewContent({ stats }: { stats: OverviewStats }) {
               ? "No questions yet"
               : `${stats.answered_count} of ${stats.question_count} answered`
           }
+          icon={CheckIcon}
         />
       </div>
 
@@ -152,12 +158,18 @@ interface StatCardProps {
   value: string;
   deltaPct?: number | null;
   subtext?: string;
+  icon: ComponentType<SVGProps<SVGSVGElement>>;
 }
 
-function StatCard({ label, value, deltaPct, subtext }: StatCardProps) {
+function StatCard({ label, value, deltaPct, subtext, icon: Icon }: StatCardProps) {
   return (
     <div className="card stat-card">
-      <div className="stat-label">{label}</div>
+      <div className="stat-card-top">
+        <span className="stat-icon">
+          <Icon />
+        </span>
+        <div className="stat-label">{label}</div>
+      </div>
       <div className="stat-value">{value}</div>
       {deltaPct !== undefined && deltaPct !== null ? (
         <div className={`stat-delta ${deltaPct >= 0 ? "up" : "down"}`}>
