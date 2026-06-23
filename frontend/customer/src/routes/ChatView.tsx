@@ -13,7 +13,7 @@ export function ChatView() {
 
   const landingQuery = useQuery({
     queryKey: ["landing", businessSlug, locationSlug],
-    queryFn: () => fetchLanding(businessSlug, locationSlug),
+    queryFn: () => fetchLanding(businessSlug, locationSlug, sessionToken),
   });
 
   const { messages, isLoading, sendMessage, isSending } = useConversation(

@@ -44,6 +44,37 @@ def test_landing_returns_business_and_location_info(client, make_user):
     assert body["suggested_questions"] == []
 
 
+def test_landing_records_a_scan_event(client, make_user, db_session):
+    from app.models.analytics import ScanEvent
+
+    user = make_user("owner@pastapalace.com")
+    business_slug, location_slug = _setup_business_and_location(client, user)
+
+    response = client.get(
+        f"/api/public/{business_slug}/{location_slug}/landing",
+        headers={"X-Session-Token": "scan-session-1"},
+    )
+    assert response.status_code == 200
+
+    scans = db_session.query(ScanEvent).all()
+    assert len(scans) == 1
+    assert scans[0].session_token == "scan-session-1"
+
+
+def test_landing_records_a_scan_event_without_session_token(client, make_user, db_session):
+    from app.models.analytics import ScanEvent
+
+    user = make_user("owner@pastapalace.com")
+    business_slug, location_slug = _setup_business_and_location(client, user)
+
+    response = client.get(f"/api/public/{business_slug}/{location_slug}/landing")
+    assert response.status_code == 200
+
+    scans = db_session.query(ScanEvent).all()
+    assert len(scans) == 1
+    assert scans[0].session_token is None
+
+
 def test_send_message_without_session_token_rejected(client, make_user):
     user = make_user("owner@pastapalace.com")
     business_slug, location_slug = _setup_business_and_location(client, user)

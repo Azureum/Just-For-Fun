@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Header
 from sqlalchemy.orm import Session
 
 from app.deps import get_public_session
@@ -10,9 +10,13 @@ router = APIRouter(tags=["public-landing"])
 
 @router.get("/{business_slug}/{location_slug}/landing", response_model=LandingResponse)
 def get_landing(
-    business_slug: str, location_slug: str, db: Session = Depends(get_public_session)
+    business_slug: str,
+    location_slug: str,
+    x_session_token: str | None = Header(default=None),
+    db: Session = Depends(get_public_session),
 ) -> LandingResponse:
     business, location = public_service.resolve_location(db, business_slug, location_slug)
+    public_service.record_scan(db, business.id, location.id, x_session_token)
     personality = personality_service.get_personality(db, business.id)
     landing_config = public_service.resolve_landing_config(db, business.id, location.id)
 
