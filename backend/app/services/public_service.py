@@ -5,6 +5,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.core.exceptions import NotFoundError
+from app.models.analytics import ScanEvent
 from app.models.business import Business
 from app.models.conversation import Conversation, Message
 from app.models.location import Location
@@ -46,6 +47,16 @@ def resolve_landing_config(
             LandingConfig.business_id == business_id, LandingConfig.location_id.is_(None)
         )
     )
+
+
+def record_scan(
+    db: Session, business_id: uuid.UUID, location_id: uuid.UUID, session_token: str | None
+) -> ScanEvent:
+    scan = ScanEvent(business_id=business_id, location_id=location_id, session_token=session_token)
+    db.add(scan)
+    db.commit()
+    db.refresh(scan)
+    return scan
 
 
 def find_conversation(

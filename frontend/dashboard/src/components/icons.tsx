@@ -107,6 +107,23 @@ export function ScanIcon(p: IconProps) {
   );
 }
 
+export function VisitorsIcon(p: IconProps) {
+  return (
+    <svg {...base} {...p}>
+      <circle cx="12" cy="8" r="3.5" />
+      <path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6" />
+    </svg>
+  );
+}
+
+export function ConversionIcon(p: IconProps) {
+  return (
+    <svg {...base} {...p}>
+      <path d="M4 4h16l-6 8v6l-4 2v-8z" />
+    </svg>
+  );
+}
+
 export function CheckIcon(p: IconProps) {
   return (
     <svg {...base} {...p}>

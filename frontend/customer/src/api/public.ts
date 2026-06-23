@@ -28,8 +28,11 @@ export interface ConversationHistoryResponse {
   messages: ChatMessageResponse[];
 }
 
-export function fetchLanding(businessSlug: string, locationSlug: string) {
-  return api.get<LandingResponse>(`/api/public/${businessSlug}/${locationSlug}/landing`);
+export function fetchLanding(businessSlug: string, locationSlug: string, sessionToken?: string) {
+  return api.get<LandingResponse>(
+    `/api/public/${businessSlug}/${locationSlug}/landing`,
+    sessionToken,
+  );
 }
 
 export function sendMessage(
