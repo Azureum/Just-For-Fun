@@ -7,7 +7,7 @@ AI Host is a multi-tenant SaaS platform for restaurants and small businesses. Ea
 - **Backend** (`backend/`) — FastAPI + PostgreSQL. Multi-tenancy is enforced with real Postgres Row-Level Security (not application-layer filtering); the backend only verifies Supabase-issued JWTs, it doesn't manage identity itself. Media is stored in Supabase Storage. The AI agent is powered by DeepSeek (OpenAI-compatible API).
 - **Dashboard** (`frontend/dashboard/`) — Vite + React + TypeScript app where business owners log in (via Supabase Auth) to manage locations, FAQs, AI personality, and (eventually) promotions, media, and analytics.
 - **Customer** (`frontend/customer/`) — Vite + React + TypeScript app served at `/b/:businessSlug/:locationSlug`, the public chat experience customers land on after scanning a QR code or NFC tag.
-- **Next/Vercel** (`frontend/next/` + `api/index.py`) - Next.js frontend plus the existing FastAPI backend exposed as a Vercel Python function.
+- **Next/Vercel** (`frontend/next/` + `api/index.py`) - Next.js frontend plus the existing FastAPI backend exposed as a Vercel Python function. The production app serves `/` as a public landing page, `/dashboard` as the authenticated owner dashboard, and `/b/:businessSlug/:locationSlug` as the public customer chat.
 ## Repository layout
 
 ```

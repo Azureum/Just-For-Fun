@@ -6,6 +6,12 @@ This repo includes a Vercel-friendly entrypoint:
 - `api/index.py` exposes the existing FastAPI app as a Vercel Python function.
 - `vercel.json` builds the Next app and rewrites `/api/*` to the FastAPI function.
 
+Production routes:
+
+- `/` serves the public AI Host landing page.
+- `/dashboard` serves the authenticated business dashboard.
+- `/b/:businessSlug/:locationSlug` serves the public customer chat experience.
+
 ## Supabase Setup
 
 Create a Supabase project, then set these variables in Vercel:
@@ -56,3 +62,5 @@ $env:NEXT_PUBLIC_SUPABASE_URL="https://<project-ref>.supabase.co"
 $env:NEXT_PUBLIC_SUPABASE_ANON_KEY="<anon-key>"
 npm run dev
 ```
+
+The Vercel build uses pinned Next.js and React versions from `frontend/next/package-lock.json`.

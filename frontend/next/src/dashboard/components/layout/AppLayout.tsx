@@ -26,25 +26,25 @@ const NAV_SECTIONS: { title: string; items: NavItem[] }[] = [
   {
     title: "Overview",
     items: [
-      { to: "/", label: "Overview", icon: OverviewIcon, end: true },
-      { to: "/conversations", label: "Conversations", icon: ConversationsIcon },
-      { to: "/analytics", label: "Analytics", icon: AnalyticsIcon },
+      { to: "/dashboard", label: "Overview", icon: OverviewIcon, end: true },
+      { to: "/dashboard/conversations", label: "Conversations", icon: ConversationsIcon },
+      { to: "/dashboard/analytics", label: "Analytics", icon: AnalyticsIcon },
     ],
   },
   {
     title: "Training",
     items: [
-      { to: "/training", label: "Training Center", icon: TrainingIcon },
-      { to: "/personality", label: "AI Personality", icon: PersonalityIcon },
+      { to: "/dashboard/training", label: "Training Center", icon: TrainingIcon },
+      { to: "/dashboard/personality", label: "AI Personality", icon: PersonalityIcon },
     ],
   },
   {
     title: "Manage",
     items: [
-      { to: "/locations", label: "Locations", icon: LocationsIcon },
-      { to: "/promotions", label: "Promotions", icon: PromotionsIcon },
-      { to: "/media", label: "Media", icon: MediaIcon },
-      { to: "/settings", label: "Settings", icon: SettingsIcon },
+      { to: "/dashboard/locations", label: "Locations", icon: LocationsIcon },
+      { to: "/dashboard/promotions", label: "Promotions", icon: PromotionsIcon },
+      { to: "/dashboard/media", label: "Media", icon: MediaIcon },
+      { to: "/dashboard/settings", label: "Settings", icon: SettingsIcon },
     ],
   },
 ];

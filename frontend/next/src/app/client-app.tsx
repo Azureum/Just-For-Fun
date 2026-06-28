@@ -42,7 +42,7 @@ export default function ClientApp() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route
-              path="/"
+              path="/dashboard"
               element={
                 <RequireAuth>
                   <AppLayout />
@@ -59,7 +59,7 @@ export default function ClientApp() {
               <Route path="media" element={<MediaPage />} />
               <Route path="settings" element={<SettingsPage />} />
             </Route>
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
         </AuthProvider>
       </QueryClientProvider>
