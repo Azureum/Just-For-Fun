@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "cd apps/web && npm ci && npm run build",
-  "outputDirectory": "apps/web/.next",
+  "buildCommand": "cd frontend/next && npm ci && npm run build",
+  "outputDirectory": "frontend/next/.next",
   "rewrites": [
     {
       "source": "/api/:path*",

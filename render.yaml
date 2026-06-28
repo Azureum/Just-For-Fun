@@ -1,4 +1,4 @@
-# Legacy Render Blueprint for AI Host.
+# Render Blueprint for AI Host.
 #
 # Deploys three services from this one repo:
 #   - aihost-backend   : FastAPI (Docker), runs migrations on boot
@@ -17,8 +17,8 @@ services:
     runtime: docker
     plan: free
     region: oregon
-    dockerfilePath: ./apps/api/Dockerfile
-    dockerContext: ./apps/api
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
     # Bind Render's injected $PORT and run migrations before serving.
     dockerCommand: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
     healthCheckPath: /health
@@ -54,7 +54,7 @@ services:
   - type: web
     name: aihost-dashboard
     runtime: static
-    rootDir: legacy/dashboard-vite
+    rootDir: frontend/dashboard
     buildCommand: npm ci && npm run build
     staticPublishPath: ./dist
     # SPA: serve index.html for client-side routes.
@@ -75,7 +75,7 @@ services:
   - type: web
     name: aihost-customer
     runtime: static
-    rootDir: legacy/customer-vite
+    rootDir: frontend/customer
     buildCommand: npm ci && npm run build
     staticPublishPath: ./dist
     routes:

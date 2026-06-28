@@ -1,25 +1,14 @@
-# Vercel Deployment
+# Vercel + Supabase Deployment
 
-This repo is organized for a single Vercel project from the repository root.
+This repo includes a Vercel-friendly entrypoint:
 
-## How It Works
+- `frontend/next/` is the Next.js frontend. It combines the dashboard routes and public customer chat route.
+- `api/index.py` exposes the existing FastAPI app as a Vercel Python function.
+- `vercel.json` builds the Next app and rewrites `/api/*` to the FastAPI function.
 
-- `apps/web/` is the Next.js React TypeScript Tailwind frontend.
-- `apps/api/` is the FastAPI backend.
-- `api/index.py` imports the FastAPI app for Vercel's Python runtime.
-- `vercel.json` builds `apps/web` and rewrites `/api/*` to `api/index.py`.
+## Supabase Setup
 
-## Create The Vercel Project
-
-1. Push this repo to GitHub.
-2. In Vercel, import the repo.
-3. Keep the project root as the repository root.
-4. Do not set Root Directory to `apps/web`.
-5. Deploy after adding environment variables.
-
-## Environment Variables
-
-Set these in Vercel:
+Create a Supabase project, then set these variables in Vercel:
 
 ```text
 DATABASE_URL=postgresql+psycopg://postgres:<password>@<host>:5432/postgres
@@ -34,37 +23,33 @@ NEXT_PUBLIC_SUPABASE_URL=https://<project-ref>.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon-key>
 ```
 
-Leave this unset in Vercel:
-
-```text
-NEXT_PUBLIC_API_BASE_URL
-```
+Leave `NEXT_PUBLIC_API_BASE_URL` unset in Vercel so the browser uses same-origin `/api/...`.
 
 ## Database Migrations
 
 Run migrations against Supabase before using the app:
 
 ```powershell
-cd apps/api
+cd backend
 $env:DATABASE_URL="postgresql+psycopg://postgres:<password>@<host>:5432/postgres"
 alembic upgrade head
 ```
 
 Use the direct/session Supabase database connection for migrations, not the transaction pooler.
 
-## Local Development
+## Local Next Development
 
 Run the backend:
 
 ```powershell
-cd apps/api
+cd backend
 python -m uvicorn app.main:app --reload
 ```
 
 Run the Next app:
 
 ```powershell
-cd apps/web
+cd frontend/next
 npm install
 $env:NEXT_PUBLIC_API_BASE_URL="http://localhost:8000"
 $env:NEXT_PUBLIC_SUPABASE_URL="https://<project-ref>.supabase.co"
