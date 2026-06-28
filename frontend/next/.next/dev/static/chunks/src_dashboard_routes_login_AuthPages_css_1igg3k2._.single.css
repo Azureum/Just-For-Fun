@@ -1,0 +1,70 @@
+/* [project]/src/dashboard/routes/login/AuthPages.css [app-client] (css) */
+.auth-page {
+  background: radial-gradient(900px 500px at 50% -10%, var(--color-accent-soft), transparent 70%),
+    var(--color-bg);
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  padding: 24px;
+  display: flex;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 392px;
+  box-shadow: var(--shadow-hover);
+  padding: 36px 34px;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-card:before {
+  content: "";
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  height: 4px;
+  position: absolute;
+  inset: 0 0 auto;
+}
+
+.auth-title {
+  text-align: center;
+  color: var(--color-primary);
+  letter-spacing: .01em;
+  font-size: 30px;
+}
+
+.auth-subtitle {
+  text-align: center;
+  color: var(--color-text-muted);
+  margin: 8px 0 26px;
+}
+
+.auth-submit {
+  justify-content: center;
+  width: 100%;
+  margin-top: 6px;
+  padding-top: 11px;
+  padding-bottom: 11px;
+}
+
+.auth-footer {
+  text-align: center;
+  color: var(--color-text-muted);
+  margin-top: 22px;
+  font-size: 13px;
+}
+
+.auth-footer a {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.auth-loading {
+  height: 100%;
+  color: var(--color-text-muted);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+/*# sourceMappingURL=src_dashboard_routes_login_AuthPages_css_1igg3k2._.single.css.map*/

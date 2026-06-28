@@ -7,13 +7,15 @@ AI Host is a multi-tenant SaaS platform for restaurants and small businesses. Ea
 - **Backend** (`backend/`) — FastAPI + PostgreSQL. Multi-tenancy is enforced with real Postgres Row-Level Security (not application-layer filtering); the backend only verifies Supabase-issued JWTs, it doesn't manage identity itself. Media is stored in Supabase Storage. The AI agent is powered by DeepSeek (OpenAI-compatible API).
 - **Dashboard** (`frontend/dashboard/`) — Vite + React + TypeScript app where business owners log in (via Supabase Auth) to manage locations, FAQs, AI personality, and (eventually) promotions, media, and analytics.
 - **Customer** (`frontend/customer/`) — Vite + React + TypeScript app served at `/b/:businessSlug/:locationSlug`, the public chat experience customers land on after scanning a QR code or NFC tag.
-
+- **Next/Vercel** (`frontend/next/` + `api/index.py`) - Next.js frontend plus the existing FastAPI backend exposed as a Vercel Python function.
 ## Repository layout
 
 ```
 backend/             FastAPI app, SQLAlchemy models, Alembic migrations, pytest tests
 frontend/dashboard/   Business-owner dashboard (authenticated)
 frontend/customer/    Public customer chat UI (anonymous)
+frontend/next/        Combined Next.js frontend for Vercel
+api/index.py          Vercel Python entrypoint for FastAPI
 docker-compose.yml    Local dev stack: db, backend, dashboard, customer
 ```
 
@@ -38,6 +40,8 @@ pytest
 A [`render.yaml`](./render.yaml) Blueprint deploys all three services (backend +
 both frontends) to [Render](https://render.com), backed by your Supabase project
 and DeepSeek. See [`DEPLOY.md`](./DEPLOY.md) for the step-by-step.
+
+For Vercel, use the included Next.js app and Python API function. See [`VERCEL.md`](./VERCEL.md).
 
 ## Status
 
